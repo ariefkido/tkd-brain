@@ -1,18 +1,17 @@
-import streamlit as st
-from core.rag import ask
-from core.formatter import format_answer
+import os
+from dotenv import load_dotenv
 
-st.title("🧠 TKD Brain")
+load_dotenv()
 
-query = st.text_input("Tanya peraturan:")
+# === Google Gemini ===
+GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY", "")
+LLM_MODEL = os.getenv("LLM_MODEL", "gemini-1.5-flash")
 
-if query:
-    answer, docs = ask(query)
-    answer, sources = format_answer(answer, docs)
+# === ChromaDB ===
+CHROMA_DB_DIR = os.getenv("CHROMA_DB_DIR", "data/chroma_db")
 
-    st.write("### Jawaban")
-    st.write(answer)
+# === Embedding ===
+EMBEDDING_MODEL = os.getenv("EMBEDDING_MODEL", "intfloat/multilingual-e5-base")
 
-    st.write("### Sumber")
-    for s in sources:
-        st.write(f"- {s}")
+# === Retrieval ===
+TOP_K = int(os.getenv("TOP_K", "5"))
