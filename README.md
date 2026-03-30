@@ -1,2 +1,8 @@
-# tkd-brain
-AI knowledge assistant for Indonesian Transfer to Regions (TKD) regulations.
+# TKD Brain
+
+AI berbasis RAG untuk tanya jawab regulasi (TKD, Dana Desa, dll)
+
+## Setup
+
+```bash
+pip install -r requirements.txt
