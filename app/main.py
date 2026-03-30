@@ -2,17 +2,21 @@ import streamlit as st
 from core.rag import ask
 from core.formatter import format_answer
 
-st.title("🧠 TKD Brain")
+st.set_page_config(page_title="TKD Brain", layout="wide")
 
-query = st.text_input("Tanya peraturan:")
+st.title("🧠 TKD Brain")
+st.write("Tanya jawab peraturan berbasis dokumen")
+
+query = st.text_input("Masukkan pertanyaan:")
 
 if query:
-    answer, docs = ask(query)
-    answer, sources = format_answer(answer, docs)
+    with st.spinner("Mencari jawaban..."):
+        answer, docs = ask(query)
+        answer, sources = format_answer(answer, docs)
 
-    st.write("### Jawaban")
+    st.subheader("Jawaban")
     st.write(answer)
 
-    st.write("### Sumber")
+    st.subheader("Sumber")
     for s in sources:
         st.write(f"- {s}")
